@@ -53,6 +53,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import com.example.peliculas.domain.model.Movie
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.OutlinedTextFieldDefaults
 
 @Composable
 fun HomeScreen(
@@ -91,6 +93,12 @@ fun HomeScreen(
                 value = state.query,
                 onValueChange = viewModel::onQueryChange,
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp),
+                shape = CircleShape,
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedContainerColor = Color.White,
+                    unfocusedContainerColor = Color.White,
+                    unfocusedBorderColor = Color.Transparent
+                ),
                 placeholder = { Text("Buscar película por título") },
                 leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
                 trailingIcon = {
@@ -111,7 +119,8 @@ fun HomeScreen(
                     FilterChip(
                         selected = state.selectedGenreId == genre.id,
                         onClick = { viewModel.onGenreSelected(genre.id) },
-                        label = { Text(genre.name) }
+                        shape = CircleShape,
+                        label = { Text("${genreEmoji(genre.name)} ${genre.name}") }
                     )
                 }
             }
@@ -241,4 +250,27 @@ private fun MovieCard(movie: Movie, onClick: () -> Unit) {
             }
         }
     }
+}
+// Emoji para cada género (si no lo conoce, usa un clapper 🎬)
+private fun genreEmoji(name: String): String = when (name.lowercase()) {
+    "acción" -> "💥"
+    "aventura" -> "🗺️"
+    "animación" -> "🎨"
+    "comedia" -> "😂"
+    "crimen" -> "🕵️"
+    "documental" -> "🎥"
+    "drama" -> "🎭"
+    "familia" -> "👨‍👩‍👧"
+    "fantasía" -> "🧙"
+    "historia" -> "📜"
+    "terror" -> "👻"
+    "música" -> "🎵"
+    "misterio" -> "🔍"
+    "romance" -> "❤️"
+    "ciencia ficción" -> "🚀"
+    "película de tv" -> "📺"
+    "suspense" -> "😰"
+    "bélica" -> "⚔️"
+    "western" -> "🤠"
+    else -> "🎬"
 }
