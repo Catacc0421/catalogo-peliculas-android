@@ -1,0 +1,4 @@
+# Copia este archivo como "local.properties" y pon tu token de TMDB.
+# Si Android Studio ya creó local.properties, solo agrega la línea de TMDB_TOKEN.
+# Token: themoviedb.org > Configuración > API > "API Read Access Token" (empieza con eyJ)
+TMDB_TOKEN=pon_aqui_tu_token
